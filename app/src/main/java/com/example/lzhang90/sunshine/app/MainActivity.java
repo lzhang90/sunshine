@@ -10,6 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -60,6 +64,23 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            ArrayList<String> fake_data=new ArrayList<String>();
+           fake_data.add("Today-Sunny-88/63");
+           fake_data.add("Tomorrow-Sunny-88/63");
+           fake_data.add("The day after tomorrow-Cloudy-80/53");
+
+            ArrayAdapter<String> mForecastAdapter =new ArrayAdapter<String>(
+                    //the current context (this fragment's parent activity)
+                    getActivity(),
+                    //ID of list item layout
+                    R.layout.list_item_forecast,
+                    //ID of the textview to populate
+                    R.id.list_item_forecast_textview,
+                    //Forecast data
+                    fake_data);
+
+            ListView listView=(ListView) rootView.findViewById(R.id.listview_forecast);
+            listView.setAdapter(mForecastAdapter);
             return rootView;
         }
     }
